@@ -1,0 +1,27 @@
+apiVersion: aminocloud.io/v1
+kind: PipelineOperator
+metadata:
+  name: FastQC
+  description: "Quality control checks on raw sequencing data. Produces per-base quality scores, GC content, adapter content, and more."
+  version: "0.12.1"
+  author: Babraham Bioinformatics
+  category: qc
+  instrumentModes: [illumina, ion_torrent]
+  tags: [quality, qc, fastq]
+inputs:
+  - id: fastq_in
+    name: FASTQ Reads
+    dataType: FASTQ
+    required: true
+outputs:
+  - id: report_out
+    name: QC Report
+    dataType: REPORT
+compute:
+  cpu: 2
+  memoryGb: 4
+  gpuRequired: false
+  estimatedMinutes: 10
+docker:
+  image: acr.aminocloud.io/aminocloud/fastqc
+  tag: "0.12.1"
